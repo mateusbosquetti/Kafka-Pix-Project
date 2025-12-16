@@ -12,7 +12,7 @@ public class NotificationConsumer {
 
     private final NotificationService service;
 
-    @KafkaListener(topics = "CREATE_PIX_TOPIC", groupId = "test-group")
+    @KafkaListener(topics = "pix.transaction.created", groupId = "notification-group")
     public void consumir(PixKafkaDTO pixKafkaDTO) {
         service.createNotification(
                 "Você recebeu um pix de " + pixKafkaDTO.value().toString(),

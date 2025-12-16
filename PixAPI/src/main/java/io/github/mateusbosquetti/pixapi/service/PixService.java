@@ -32,7 +32,7 @@ public class PixService {
 
         pix = this.repository.save(pix);
         PixKafkaDTO kafkaDTO = new PixKafkaDTO(pix.getValor(), pix.getChaveDestino().getUserId());
-        kafkaTemplate.send("CREATE_PIX_TOPIC", pix.getIdentificador().toString(),  kafkaDTO);
+        kafkaTemplate.send("pix.transaction.created", pix.getIdentificador().toString(),  kafkaDTO);
         return pix;
     }
 
