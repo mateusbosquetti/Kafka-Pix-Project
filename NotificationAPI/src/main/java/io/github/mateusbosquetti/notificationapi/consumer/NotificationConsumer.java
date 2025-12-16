@@ -18,6 +18,11 @@ public class NotificationConsumer {
                 "Você recebeu um pix de " + pixKafkaDTO.value().toString(),
                 pixKafkaDTO.destinationUserId()
         );
+
+        service.createNotification(
+                "Você enviou um pix de " + pixKafkaDTO.value(),
+                pixKafkaDTO.originUserId()
+        );
     }
 
 }
