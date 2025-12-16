@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>io.github.mateusbosquetti</groupId>
-    <artifactId>KafkaPIX</artifactId>
+    <artifactId>NotificationAPI</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>KafkaPIX</name>
-    <description>KafkaPIX</description>
+    <name>NotificationAPI</name>
+    <description>NotificationAPI</description>
     <url/>
     <licenses>
         <license/>
