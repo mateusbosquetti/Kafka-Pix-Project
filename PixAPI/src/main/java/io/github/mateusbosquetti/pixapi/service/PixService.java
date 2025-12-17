@@ -10,8 +10,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-
 @Service
 @AllArgsConstructor
 public class PixService {
@@ -21,8 +19,6 @@ public class PixService {
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
     public Pix createPix(PixRequestDTO pixRequestDTO) {
-        long startTime = System.nanoTime();
-
         Key chaveOrigem = this.keyService.findByKey(pixRequestDTO.chaveOrigem());
         Key chaveDestino = this.keyService.findByKey(pixRequestDTO.chaveDestino());
 
@@ -34,10 +30,6 @@ public class PixService {
                 .build();
 
         pix = this.repository.save(pix);
-
-        long endTime = System.nanoTime();
-        long durationMs = (endTime - startTime) / 1_000_000;
-        System.out.println("Tempo de execução até save: " + durationMs + "ms");
 
         PixKafkaDTO kafkaDTO = new PixKafkaDTO(pix.getValor(), pix.getChaveOrigem().getUserId(), pix.getChaveDestino().getUserId());
         kafkaTemplate.send("pix.transaction.created", pix.getIdentificador().toString(),  kafkaDTO);
